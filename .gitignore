@@ -1,0 +1,48 @@
+gitignore
+# --- Secrets & Local Environment Variables ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Virtual Environments ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Python Bytecode & Build Artifacts ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+develop-eggs/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+
+# --- Testing, Linting & Type-Checking Caches ---
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.tox/
+
+# --- Logs & Local Runtime Data ---
+*.log
+logs/
+tmp/
+temp/
+
+# --- IDE & OS Files ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

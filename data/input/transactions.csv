@@ -1,0 +1,4 @@
+transaction_id,transaction_date,department,amount
+TX-001,2026-11-17,Engineering,1500.00
+TX-002,2026-11-17,Sales,750.50
+TX-003,2026-11-17,Engineering,250.25

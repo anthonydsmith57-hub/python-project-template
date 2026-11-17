@@ -1,0 +1,76 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "my-project-name"
+version = "0.1.0"
+description = "Standardized Python project."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.11.0",
+    "pip-audit>=2.7.0",
+    "pre-commit>=3.8.0",
+    "pytest>=8.3.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.6.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/package_name"]
+
+# --- Ruff: Formatting, Linting & Security ---
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes (unused imports/variables)
+    "I",    # isort (import sorting)
+    "B",    # flake8-bugbear (common bugs & mutable defaults)
+    "UP",   # pyupgrade (modern Python syntax)
+    "S",    # flake8-bandit (security checks)
+    "SIM",  # flake8-simplify
+    "PTH",  # flake8-use-pathlib (enforce pathlib over os.path)
+    "T20",  # flake8-print (disallow stray print statements)
+    "ANN",  # flake8-annotations (enforce type hints)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "S101", # Allow assert statements in pytest
+    "ANN",  # Relax strict type annotations in test functions
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# --- mypy: Static Type Checking ---
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+mypy_path = "src"
+explicit_package_bases = true
+plugins = ["pydantic.mypy"]
+
+
+# --- pytest: Testing & Coverage ---
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra -q --cov=src --cov-report=term-missing"
